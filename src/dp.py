@@ -10,8 +10,8 @@ def value(char_vals, str_a, str_b):
 
     # Bottom Up
     # start at 1 to avoid dp recursion out of bounds
-    for i in range(1,rows+1):
-        for j in range(1,cols+1):
+    for i in range(1, rows+1):
+        for j in range(1, cols+1):
             # Case 1: Move i (similar to gap)
             case1 = dp[i-1][j]
 
@@ -30,9 +30,25 @@ def value(char_vals, str_a, str_b):
     maxValue = dp[rows][cols]
     return dp, maxValue #dp array is for backtracking
 
-def backtracking(dp, str_a, str_b):
-    # find where maxValue was
-
+def backtrack(dp, char_values, str_a, str_b):
     # walk backwards to recreate string
+    i, j = len(str_a), len(str_b)
 
-    return substring
+    sequence = []
+
+    while i > 0 and j > 0:
+        # Case 1:
+        if dp[i][j] == dp[i-1][j]:
+            i -= 1
+
+        # Case 2:
+        elif dp[i][j] == dp[i][j-1]:
+            j -= 1
+
+        # Case 3:
+        elif (str_a[i-1] == str_b[j-1]) and (dp[i][j] == char_values[str_a[i-1]] + dp[i-1][j-1]):
+            sequence.append(str_a[i-1])
+            i -= 1
+            i -= j
+
+    return sequence.reverse()
