@@ -48,9 +48,9 @@ and B. What is the runtime of your algorithm?_
 
 **Algorithm**:  
 ```
-ComputeLength(values, a, b) {
-  m = length of a
-  n = length of b
+ComputeLength(values, A, B) {
+  m = length of A
+  n = length of B
 
   # Initialize 2D Array to hold (value 'v', length 'l')
   for i = 0 to m
@@ -61,7 +61,7 @@ ComputeLength(values, a, b) {
   for i = 1 to m
     for j = 1 to n
       (value1, length1) = max(M[i-1, j], M[i, j-1])
-      if a_i == b_j:
+      if A_i == B_j:
         value = value of the matching character
         (value2, length2) = max(M[i-1, j], M[i, j-1], value + M[i-1, j-1])
       else:
@@ -81,5 +81,5 @@ ComputeLength(values, a, b) {
 }
 ```
 **Runtime**:  
-O($m \times n$) due to the two nested for loops calling constant functions.
+O($m \times n$), where m is the length of A and n is the length of B, due to the two nested for loops calling constant functions.
 
