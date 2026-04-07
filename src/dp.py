@@ -37,18 +37,19 @@ def backtrack(dp, char_values, str_a, str_b):
     sequence = []
 
     while i > 0 and j > 0:
+        # Moved Case 3 to top. For optimal reconstruction, checking the match case first is best.
+        # Case 3:
+        if (str_a[i-1] == str_b[j-1]) and (dp[i][j] == char_values[str_a[i-1]] + dp[i-1][j-1]):
+            sequence.append(str_a[i-1])
+            i -= 1
+            j -= 1
+        
         # Case 1:
-        if dp[i][j] == dp[i-1][j]:
+        elif dp[i][j] == dp[i-1][j]:
             i -= 1
 
         # Case 2:
-        elif dp[i][j] == dp[i][j-1]:
+        else: # dp[i][j] == dp[i][j-1]:
             j -= 1
 
-        # Case 3:
-        elif (str_a[i-1] == str_b[j-1]) and (dp[i][j] == char_values[str_a[i-1]] + dp[i-1][j-1]):
-            sequence.append(str_a[i-1])
-            i -= 1
-            i -= j
-
-    return sequence.reverse()
+    return "".join(reversed(sequence))
