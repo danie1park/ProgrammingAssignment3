@@ -43,3 +43,43 @@ As for the last line, this line covers the dynamic programming logic where 3 pot
 As such, this recurrence captures all potential possibilities, allowing for an optimal solution to be found.
 
 ## Question 3
+_Give pseudocode of an algorithm to compute the length of the HVLCS of given strings A
+and B. What is the runtime of your algorithm?_
+
+**Algorithm**:  
+```
+ComputeLength(values, a, b) {
+  m = length of a
+  n = length of b
+
+  # Initialize 2D Array to hold (value 'v', length 'l')
+  for i = 0 to m
+    M[i, 0] = (0, 0)
+  for j = 0 to n
+    M[0, j] = (0, 0)
+
+  for i = 1 to m
+    for j = 1 to n
+      (value1, length1) = max(M[i-1, j], M[i, j-1])
+      if a_i == b_j:
+        value = value of the matching character
+        (value2, length2) = max(M[i-1, j], M[i, j-1], value + M[i-1, j-1])
+      else:
+        (value2, length2) = -infinity, -infinity
+
+      # Priority = value, Tiebreak = length
+      if (value1 > value2):
+        M[i, j] = (value1, length1)
+      else if (value2 > value1):
+        M[i, j] = (value2, length2)
+      else: #EQUALS - Tie break
+        if (length1 >= length2):
+          M[i,j] = (value1, length1)
+        if (length2 > length1):
+          M[i,j] = (value2, length2)
+  return M[m,n].length # return length
+}
+```
+**Runtime**:  
+O($m \times n$) due to the two nested for loops calling constant functions.
+
